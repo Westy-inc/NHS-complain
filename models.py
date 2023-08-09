@@ -10,3 +10,4 @@ class Task(db.Model):
    
     def __repr__(self):
         return f'<Student {self.title} was created {self.date}>'
+    

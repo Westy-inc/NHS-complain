@@ -55,3 +55,11 @@ def delete(task_id):
          return redirect(url_for('index'))
         return render_template('delete.html' , form=form, task_id=task_id,task=task.title)
     return redirect(url_for('index'))
+
+@app.route("/login")
+def login():
+   return render_template('login.html')
+
+@app.route("/register")
+def register():
+   return render_template('register.html')
