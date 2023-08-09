@@ -20,3 +20,8 @@ class NewUserForm(FlaskForm):
     password = PasswordField('password', validators=[InputRequired()], min_length=8, max_length=20,render_kw={'placeholder': 'password'}) 
     email = StringField('email', validators=[InputRequired()])
     submit = SubmitField('register')
+
+class LoginUserForm(FlaskForm):
+    username = StringField('username', validators=[InputRequired()],min_length=3, max_length=20,render_kw={'placeholder': 'username'}) 
+    password = PasswordField('password', validators=[InputRequired()], min_length=8, max_length=20,render_kw={'placeholder': 'password'}) 
+    submit = SubmitField('login')
