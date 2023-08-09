@@ -1,4 +1,5 @@
 from app import db
+from flask_login import UserMixin
 
 
 
@@ -11,3 +12,9 @@ class Task(db.Model):
     def __repr__(self):
         return f'<Student {self.title} was created {self.date}>'
     
+class User(db.Model,UserMixin ):
+    __bind_key__ = "auth"
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(20), nullable=False, uqiue=True)
+    password = db.Column(db.String(80), nullable =False)
+    email = db.Column(db.String, nullable=False)

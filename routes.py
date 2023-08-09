@@ -2,6 +2,7 @@ from datetime import datetime
 from app import app, db
 from flask import Flask, render_template ,redirect,url_for,flash,get_flashed_messages
 from models import Task
+from models import User
 
 import forms
 
