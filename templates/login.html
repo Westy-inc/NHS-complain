@@ -1,0 +1,20 @@
+
+{% extends "base.html" %}
+{% block main %}
+<div class="container-fluid">
+  <form action="{{ url_for('login') }}" method="post">
+    {{ form.csrf_token }}
+    <div class="row">
+      <h3>Login</h3>
+      <div class="col">
+        {{ form.username(class="form-control") }}
+        {{ form.password(class="form-control") }}
+        <a href="{{ url_for('register') }}">New here? Why not Register</a>
+      </div>
+      <div class="col">
+        {{ form.submit(class="btn btn-primary") }}
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}
