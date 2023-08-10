@@ -3,6 +3,7 @@ from app import app, db
 from flask import Flask, render_template ,redirect,url_for,flash,get_flashed_messages
 from models import Task
 from models import User
+from flask_bcrypt import Bcrypt
 
 import forms
 
@@ -65,4 +66,15 @@ def login():
 @app.route("/register",  methods=['GET', 'POST'])
 def register():
    form = forms.NewUserForm()
+   if form.validate_on_submit():
+      hashed_password = Bcrypt().generate_password_hash(form.password.data)
+      new_user = User(username=form.username.data, password=hashed_password , email=form.email.data)
+      db.session.add(new_user)
+      db.session.commit()
+      return redirect(url_for('login'))
    return render_template('register.html', form=form)
+
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')

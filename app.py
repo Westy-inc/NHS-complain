@@ -1,7 +1,7 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin
+from flask_login import UserMixin, login_user,LoginManager, login_required , logout_user, current_user
 
 basedir = os.path.abspath(os.path.dirname(__file__)) 
 
@@ -12,6 +12,13 @@ app.config['SQLALCHEMY_DATABASE_URI' ] =\
 app.config ['SQLALCHEMY_BINDS'] = {'auth' : 'sqlite:///' + os.path.join(basedir, 'users.db')}
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view='login'
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 
 
