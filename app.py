@@ -6,7 +6,7 @@ from flask_login import UserMixin, login_user,LoginManager, login_required , log
 basedir = os.path.abspath(os.path.dirname(__file__)) 
 
 app = Flask (__name__)
-app.config['SECRET_KEY']  = 'djflkdjflksflk' #crf key
+app.config['SECRET_KEY']  = 'djflkdjflksflk' #crf key to be moved to config file
 app.config['SQLALCHEMY_DATABASE_URI' ] =\
         'sqlite:///' + os.path.join(basedir, 'task.db')
 app.config ['SQLALCHEMY_BINDS'] = {'auth' : 'sqlite:///' + os.path.join(basedir, 'users.db')}
@@ -16,13 +16,13 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view='login'
 
-@login_manager.user_loader
+@login_manager.user_loader   #manager for logining user in 
 def load_user(user_id):
     return User.query.get(int(user_id))
 
 
 
-db = SQLAlchemy(app) #db instance
+db = SQLAlchemy(app) #db instances
 app.app_context().push() #for setting up db file via terminal
 
 
