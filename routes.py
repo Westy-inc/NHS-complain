@@ -57,10 +57,12 @@ def delete(task_id):
         return render_template('delete.html' , form=form, task_id=task_id,task=task.title)
     return redirect(url_for('index'))
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
-   return render_template('login.html')
+   form = forms.LoginUserForm()
+   return render_template('login.html',form=form)
 
-@app.route("/register")
+@app.route("/register",  methods=['GET', 'POST'])
 def register():
-   return render_template('register.html')
+   form = forms.NewUserForm()
+   return render_template('register.html', form=form)

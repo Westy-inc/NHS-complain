@@ -1,24 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-</head>
-
-<body>
-    <h1>Register Page</h1>
-
-    <form method="POST" action="">
-        {{ form.hidden_tag() }}
-        {{ form.username }}
-        {{ form.password }}
-        {{ form.submit }}
-    </form>
-
-    <a href="{{ url_for('login') }}">Already have an account? Log In</a>
-</body>
-
-</html>
+{% extends "base.html" %}
+{% block main %}
+<div class="container-fluid">
+  <form action="{{ url_for('register') }}" method="post">
+    {{ form.csrf_token }}
+    <div class="row">
+      <h3>Login</h3>
+      <div class="col">
+        {{ form.username(class="form-control") }}
+        {{ form.password(class="form-control") }}
+        {{ form.email(class="form-control") }}
+      </div>
+      <div class="col">
+        {{ form.submit(class="btn btn-primary") }}
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}
