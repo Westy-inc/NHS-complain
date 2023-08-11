@@ -6,7 +6,7 @@ from models import User
 class AddTaskForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
     submit = SubmitField('Submit')
-    #public = BooleanField()
+    public = BooleanField('public?')
 
 class deleteTaskForm(FlaskForm):
     submit = SubmitField("delete?")
