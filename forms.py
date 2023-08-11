@@ -1,11 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField , SubmitField,PasswordField
+from wtforms import StringField , SubmitField,PasswordField,BooleanField
 from wtforms.validators import DataRequired,InputRequired,ValidationError,Length
 from models import User
 
 class AddTaskForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
     submit = SubmitField('Submit')
+    #public = BooleanField()
 
 class deleteTaskForm(FlaskForm):
     submit = SubmitField("delete?")

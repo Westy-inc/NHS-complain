@@ -2,7 +2,7 @@ from flask_bcrypt import Bcrypt
 from datetime import datetime
 from app import app, db
 from flask import Flask, render_template ,redirect,url_for,flash
-from models import Task
+from models import Task 
 from models import User
 from flask_login import UserMixin, login_user,LoginManager, login_required , logout_user, current_user
 
@@ -17,10 +17,11 @@ def index():
 
 
 @app.route('/add', methods=['GET', 'POST'])
+@login_required
 def add():
     form = forms.AddTaskForm()
     if form.validate_on_submit():
-        t =Task(title=form.title.data, date=datetime.utcnow())
+        t =Task(title=form.title.data, date=datetime.utcnow(),user_id=current_user.id)
         db.session.add(t)
         db.session.commit()
         flash('task added')
@@ -97,4 +98,5 @@ def logout():
 @app.route('/dashboard',methods=['GET', 'POST'])
 @login_required
 def dashboard():
-    return render_template('dashboard.html')
+    task = Task.query.filter_by(user_id=current_user.id)
+    return render_template('dashboard.html',task=task)
