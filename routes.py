@@ -4,7 +4,7 @@ from app import app, db
 from flask import Flask, render_template ,redirect,url_for,flash
 from models import Task 
 from models import User
-from flask_login import UserMixin, login_user,LoginManager, login_required , logout_user, current_user
+from flask_login import login_user, login_required , logout_user, current_user
 
 import forms
 
