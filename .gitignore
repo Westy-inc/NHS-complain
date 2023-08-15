@@ -12,6 +12,7 @@ instance/*
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyc
 
 # C extensions
 *.so
@@ -305,8 +306,3 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,python,flask,visualstudiocode
-__pycache__/routes.cpython-311.pyc
-__pycache__/routes.cpython-311.pyc
-*.pyc
-*.pyc
-*.pyc
