@@ -16,7 +16,7 @@ s = URLSafeTimedSerializer('secret')
 @app.route('/')
 @app.route('/index')
 def index():
-    tasks = Task.query.all()
+    tasks = Task.query.filter_by(public=True)
     return render_template('index.html', tasks=tasks)
 
 
@@ -26,7 +26,7 @@ def index():
 def add():
     form = forms.AddTaskForm()
     if form.validate_on_submit():
-        t =Task(title=form.title.data, date=datetime.utcnow(),user_id=current_user.id)
+        t =Task(title=form.title.data,body=form.body.data,public=form.public.data,date=datetime.utcnow(),user_id=current_user.id)
         db.session.add(t)
         db.session.commit()
         flash('task added')
