@@ -5,17 +5,21 @@
   <form action="{{ url_for('add') }}" method="post">
     {{ form.csrf_token }}
     <div class="row">
-      <h3>Add Task</h3>
-      <div class="col">
+      <h3>Add complaint</h3>
+    </div>
+      <div class="row">
+        <h4>Title of the complaint</h4>
         {{ form.title(class="form-control") }}
       </div>
-      <div class="col">
+      <div class="row">
+        <h4>body of the complaint</h4>
+        {{ form.body(class="form-control") }}
+      </div>
+      <div class="row">
         {{ form.submit(class="btn btn-primary") }}
       </div>
-    </div>
     <div class="row">
-      <p>Wanna make it public?</p>
-      <div class="col">
+      <p>Wanna make it public this mean the genral public can see not just nhs admins</p>
       {{ form.public(class="checkbox") }}
       </div>
     </div>
