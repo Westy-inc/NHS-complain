@@ -1,12 +1,16 @@
 from flask_bcrypt import Bcrypt
 from datetime import datetime
-from app import app, db
-from flask import Flask, render_template ,redirect,url_for,flash
+from app import app, db, mail
+from flask import Flask, render_template ,redirect,url_for,flash,request
 from models import Task 
 from models import User
-from flask_login import UserMixin, login_user,LoginManager, login_required , logout_user, current_user
-
+from flask_login import login_user,login_required , logout_user, current_user
+from flask_mail import Message
+from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 import forms
+
+app.config.from_pyfile('config.cfg')
+s = URLSafeTimedSerializer('secret')
 
 @app.route('/')
 @app.route('/index')
@@ -84,9 +88,28 @@ def register():
                         , email=form.email.data)
         db.session.add(new_user)
         db.session.commit()
+        if new_user:
+            email2 = form.email.data
+            token = s.dumps(email2, salt='email_confirmation')
+            msg = Message('Confirm Your Email Address', sender='nhscomplaintsuni@gmail.com', recipients=[email2])
+            msg.html = render_template('email.html', token=token)
+            link = url_for('comfirm', token=token , _external=True)
+            msg.body = 'Your link is {}'.format(link)
+            mail.send(msg)
+        
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
+
+
+@app.route('/comfirm/<token>', methods=['GET', 'POST'])
+def comfirm(token):
+    try:
+        email = s.loads(token, salt='email_confirmation',max_age=3600)
+    except SignatureExpired:
+        return '<h1>The confirmation link has expired</h1>'
+    flash('email confirmed please login')
+    return redirect(url_for('login'))
 
 @app.route("/logout")
 @login_required

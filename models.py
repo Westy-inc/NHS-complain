@@ -21,6 +21,7 @@ class User(db.Model,UserMixin ):
     username = db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable =False)
     email = db.Column(db.String, nullable=False)
+    #vailid = db.Column(db.Boolean, nullable=False, default = False)
     tasks = db.relationship('Task', backref='user', lazy=True)
 
 
