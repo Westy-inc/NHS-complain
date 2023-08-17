@@ -8,7 +8,7 @@ from flask_login import login_user,login_required , logout_user, current_user
 from flask_mail import Message
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 import forms
-import ssl
+import ssl,smtplib
 
 app.config.from_pyfile('config.cfg')
 s = URLSafeTimedSerializer('secret')
@@ -89,14 +89,13 @@ def register():
                         , email=form.email.data)
         db.session.add(new_user)
         db.session.commit()
-        if new_user:
-            email2 = form.email.data
-            token = s.dumps(email2, salt='email_confirmation')
-            msg = Message('Confirm Your Email Address', sender='nhscomplaintsuni@gmail.com', recipients=[email2])
-           # msg.html = render_template('email.html', token=token)
-            link = url_for('comfirm', token=token , _external=True)
-            msg.body = 'Your link is {}'.format(link)
-            mail.send(msg)
+        email2 = form.email.data
+        token = s.dumps(email2, salt='email_confirmation')
+        msg = Message('Confirm Your Email Address', sender='nhscomplaintsuni@gmail.com', recipients=[email2])
+        # msg.html = render_template('email.html', token=token)
+        link = url_for('comfirm', token=token , _external=True)
+        msg.body = 'Your link is {}'.format(link)
+        mail.send(msg)
         
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
