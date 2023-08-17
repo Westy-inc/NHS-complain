@@ -34,7 +34,6 @@ def add():
 def edit(task_id):
     task = Task.query.get(task_id)
     form = forms.AddTaskForm()
-
     if task:
         if form.validate_on_submit():
             task.title = form.title.data
