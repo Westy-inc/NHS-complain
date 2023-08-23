@@ -2,11 +2,10 @@ from flask_bcrypt import Bcrypt
 from datetime import datetime
 from app import app, db
 from flask import render_template ,redirect,url_for,flash
-from models import Task 
-from models import User
+from .models import Task , User
 from flask_login import login_user, login_required , logout_user, current_user
 
-import forms
+import forms 
 
 @app.route('/')
 @app.route('/index')

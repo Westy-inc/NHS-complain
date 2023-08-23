@@ -21,7 +21,7 @@ app.app_context().push() #for setting up db file via terminal
 
 
 
-from routes import *
+from .routes import *
 
 
 
