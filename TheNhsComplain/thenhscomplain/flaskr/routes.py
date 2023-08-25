@@ -2,9 +2,8 @@ from flask_bcrypt import Bcrypt
 from datetime import datetime
 from app import app, db
 from flask import render_template ,redirect,url_for,flash
-from .models import Task , User
+from models import Task , User
 from flask_login import login_user, login_required , logout_user, current_user
-
 import forms 
 
 @app.route('/')
@@ -96,5 +95,6 @@ def logout():
 @app.route('/dashboard',methods=['GET', 'POST'])
 @login_required
 def dashboard():
-    task = Task.query.filter_by(user_id=current_user.id)
-    return render_template('dashboard.html',task=task)
+        task = Task.query.filter_by(user_id=current_user.id)
+        return render_template('dashboard.html',task=task)
+
