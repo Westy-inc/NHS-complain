@@ -1,9 +1,8 @@
-from app import app,  db
 from flask_login import UserMixin,LoginManager, current_user
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import Admin , AdminIndexView
 from flask import redirect,url_for
-
+from app import app , db
 
 
 login = LoginManager(app)
@@ -18,10 +17,6 @@ class Task(db.Model):
     date = db.Column(db.DateTime(timezone=True), nullable=False)
     public = db.Column(db.Boolean, default=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    
-    def __repr__(self):
-        return f'<Student {self.title} was created {self.date}>'
-
 
 class User(db.Model,UserMixin ):
     id = db.Column(db.Integer, primary_key=True)

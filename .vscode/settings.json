@@ -1,5 +1,6 @@
 {
     "python.analysis.extraPaths": [
-        "./TheNhsComplain/thenhscomplain/flaskr"
+        "./TheNhsComplain/thenhscomplain/flaskr",
+        "./TheNhsComplain/thenhscomplain"
     ]
 }
