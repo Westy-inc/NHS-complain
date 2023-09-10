@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 from app import app,  db
 from flask_login import UserMixin,LoginManager, current_user
 from flask_admin.contrib.sqla import ModelView
@@ -9,6 +10,10 @@ from flask import redirect,url_for,flash
 
 login = LoginManager(app)
 
+=======
+from app import app, db
+from flask_login import UserMixin,LoginManager
+>>>>>>> parent of 23492c5 (added admin page and put login req)
 =======
 from app import app, db
 from flask_login import UserMixin,LoginManager
@@ -35,6 +40,7 @@ class User(db.Model,UserMixin ):
     tasks = db.relationship('Task', backref='user', lazy=True)
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     @login.user_loader
     def load_user(user_id):
@@ -66,6 +72,8 @@ admin = Admin(app ,index_view=Adminviewsec())
 admin.add_view(Adminsec(Task,db.session))
 admin.add_view(Adminsec(User,db.session))
 
+=======
+>>>>>>> parent of 23492c5 (added admin page and put login req)
 =======
 >>>>>>> parent of 23492c5 (added admin page and put login req)
 login_manager = LoginManager()
