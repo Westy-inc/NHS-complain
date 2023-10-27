@@ -30,7 +30,7 @@ class Hospitals(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     HospitalName =  db.Column(db.String(225), nullable=False)
     HospitalAddress = db.Column(db.String(225), nullable=False)
-    trustID = db.Column(db.Integer, db.ForeignKey('trust.id'))
+    trustID = db.Column(db.Integer, db.ForeignKey('trusts.id'))
 
 class Trusts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
