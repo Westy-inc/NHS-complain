@@ -26,6 +26,20 @@ class User(db.Model,UserMixin ):
     tasks = db.relationship('Task', backref='user', lazy=True)
     admin = db.Column(db.Boolean, default=False)
 
+class Hospitals(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    HospitalName =  db.Column(db.String(225), nullable=False)
+    HospitalAddress = db.Column(db.String(225), nullable=False)
+    trustID = db.Column(db.Integer, db.ForeignKey('trust.id'))
+
+class Trusts(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    TrustName = db.Column(db.String(225), nullable=False)
+    Region = db.Column(db.String(225), nullable=False)
+    HeadquartersAddress = db.Column(db.String(225), nullable=False)
+    Hospitals = db.relationship('Hospitals', backref='trust', lazy=True)
+
+
 
     @login.user_loader
     def load_user(user_id):
@@ -42,7 +56,6 @@ class Postview(ModelView):
 class  Adminsec(ModelView):
     def is_accessible(self):
         return current_user.is_authenticated
-    
     def inaccessible_callback(self, name, **kwargs):
         return redirect(url_for('login'))
 
