@@ -1,14 +1,23 @@
 {% extends "base.html" %}
-
 {% block main %}
-  {% for task in tasks %}
-    <div class="card">
-      <div class="card-body">
-        <h3>{{ task.title }}</h3>
-        <p>Added on {{ task.date }}</p>
-        <a href={{url_for('edit', task_id=task.id)}} class="btn btn-primary">Edit</a>
-        <a href={{url_for('delete', task_id=task.id)}} class="btn btn-danger">Delete</a>
-      </div>
-    </div>
-  {% endfor %}
+  <h1> Why complaint? </h1>
+  <p>You have the right to make a complaint about any aspect of NHS care, treatment or service, and this is written into the <a href="https://www.gov.uk/government/publications/the-nhs-constitution-for-england">NHS Constitution on GOV.UK</a> </p>
+  <or>If you're unhappy with an NHS service, it's often worthwhile discussing your concerns early on with the provider of the service, as they may be able to sort the issue out quickly but if you feel this has failed to reslove your issue or you feel like you can not talk to the provider of the service about the issue this service will help log your complaint and help get it resolved</p>
+  <br>
+  <h2> How a complaint maybe resolved </h2>
+  <ul>
+    <li>Lorem Ipsum</li>
+    <li>Lorem Ipsum</li>
+    <li>Lorem Ipsum</li>
+    <li>Lorem Ipsum</li>
+  </ul>
+<h2> When to file a complaint</h2>
+<ul>
+  <li>If you feel that you Care has been mismanged</li>
+  <li>If your feel a member of staff has been inapproite</li>
+  <li>Lorem Ipsum</li>
+  <li>Lorem Ipsum</li>
+</ul>
+
+
 {% endblock %}
