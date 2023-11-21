@@ -1,3 +1,55 @@
 {% extends "base.html" %}
 
 {% block main %}
+<nav class="nhsuk-breadcrumb" aria-label="Breadcrumb">
+    <ol class="nhsuk-breadcrumb__list">
+        <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="{{ url_for('index') }}">Home</a></li>
+        <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="#">Section</a></li>
+        <li class="nhsuk-breadcrumb__item"><a class="nhsuk-breadcrumb__link" href="#">Subsection</a></li>
+    </ol>
+    <p class="nhsuk-breadcrumb__back">
+        <a class="nhsuk-breadcrumb__backlink" href="#">
+        <span class="nhsuk-u-visually-hidden">Back to &nbsp;</span>
+        Subsection
+        </a>
+    </p>
+    </div>
+</nav>
+
+<div class="nhsuk-width-container">
+
+    <main class="nhsuk-main-wrapper" id="maincontent" role="main">
+
+    <div class="nhsuk-grid-row">
+        <div class="nhsuk-grid-column-two-thirds">
+
+        <h1>NHS complaint's service</h1>
+        <p>you can you use this service to File a complaint with a NHS service</p>
+        <p>You can use this service if you:</p>
+        <ul>
+            <li>live in England</li>
+            <li>are under the care of the NHS</li>
+            <li>need to change a thing</li>
+        </ul>
+
+        <h2>Before you start</h2>
+
+        <p>We'll ask you for: </p>
+        <ul>
+            <li>What service you have a complaint aganist</li>
+            <li>When did this issue occur</li>
+            <li>and how it affect you and you care</li>
+            <li>your name and contact information</li>
+        </ul>
+        <form action="{{ url_for('start') }}" method="post">
+            {{ form.csrf_token }}
+        {{ form.submit(class="nhsuk-button") }}
+
+        <p>By using this service you are agreeing to our <a href="#">terms of use</a> and <a href="#">privacy policy</a>.</p>
+
+        </div>
+    </div>
+
+    </main>
+</div>
+{% endblock %}

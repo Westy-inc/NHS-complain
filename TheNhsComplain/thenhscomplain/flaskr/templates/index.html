@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 {% block main %}
+<h1>THIS IS NOT A REAL NHS SERVICE JUST A MOCK UP !!!!</h1>
+
+
+
+
+
+
   <h1> Why complaint? </h1>
   <p>You have the right to make a complaint about any aspect of NHS care, treatment or service, and this is written into the <a href="https://www.gov.uk/government/publications/the-nhs-constitution-for-england">NHS Constitution on GOV.UK</a> </p>
   <or>If you're unhappy with an NHS service, it's often worthwhile discussing your concerns early on with the provider of the service, as they may be able to sort the issue out quickly but if you feel this has failed to reslove your issue or you feel like you can not talk to the provider of the service about the issue this service will help log your complaint and help get it resolved</p>
@@ -18,6 +25,10 @@
   <li>Lorem Ipsum</li>
   <li>Lorem Ipsum</li>
 </ul>
+
+<form action="{{ url_for('index') }}" method="post">
+  {{ form.csrf_token }}
+{{ form.submit(class="nhsuk-button") }}
 
 
 {% endblock %}

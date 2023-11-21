@@ -8,21 +8,19 @@
       <h3>Add complaint</h3>
     </div>
       <div class="row">
-        <h4>Title of the complaint</h4>
-        {{ form.title(class="form-control") }}
-      </div>
-      <div class="row">
         <h4>body of the complaint</h4>
-        {{ form.body(class="form-control") }}
+        <div class="nhsuk-hint" id="complaint-hint">
+          Do not include personal or financial information, for example, your National Insurance number or credit card details.
+        </div>
+        {{ form.body(class="nhsuk-textarea") }}
       </div>
       <div class="row">
         {{ form.submit(class="nhsuk-button") }}
       </div>
-    <div class="row">
-      <p>Wanna make it public this mean the genral public can see not just nhs admins</p>
-      {{ form.public(class="checkbox") }}
-      </div>
     </div>
   </form>
 </div>
+
+
+
 {% endblock %}

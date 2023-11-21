@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="nhsuk-form-group">
+
+    <fieldset class="nhsuk-fieldset" aria-describedby="contact-hint">
+      <legend class="nhsuk-fieldset__legend nhsuk-fieldset__legend--l">
+        <h1 class="nhsuk-fieldset__heading">
+          How would you prefer to be contacted?
+        </h1>
+      </legend>
+  
+      <div class="nhsuk-hint" id="contact-hint">
+        Select one option
+      </div>
+  
+      <div class="nhsuk-radios nhsuk-radios--conditional">
+        {% for subfield in form.howtocontact %}
+          <div class="nhsuk-radios__item">  
+          <div>  {{ subfield (class="nhsuk-radios__input")}} 
+          <label class="nhsuk-label nhsuk-radios__label" for="contact-1"> {{ subfield.label ()}} </label></div></div>
+{% endfor %}
+        
+      </div>
+
+{% endblock %}

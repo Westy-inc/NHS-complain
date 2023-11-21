@@ -9,13 +9,14 @@ import forms
 @app.route('/')
 @app.route('/index')
 def index():
-    tasks = Task.query.filter_by(public=True)
-    return render_template('index.html', tasks=tasks)
+    form = forms.NextForm()
+    if form.validate_on_submit():
+            return redirect(url_for('start'))
+    return render_template('index.html')
 
 
 
 @app.route('/add', methods=['GET', 'POST'])
-@login_required
 def add():
     form = forms.AddTaskForm()
     if form.validate_on_submit():
@@ -98,3 +99,36 @@ def dashboard():
         task = Task.query.filter_by(user_id=current_user.id)
         return render_template('dashboard.html',task=task)
 
+
+@app.route('/details',methods=['GET', 'POST'])
+def details():
+        form = forms.Userdetails()
+        next = forms.NextForm()
+        if next.validate_on_submit():
+            return redirect(url_for('dateofbirth'))
+        return render_template('details.html',form=form , next = next)
+
+@app.route('/dateofbirth',methods=['GET', 'POST'])
+def dateofbirth():
+        form = forms.Userdetails()
+        next = forms.NextForm()
+        if next.validate_on_submit():
+            return redirect(url_for('ContactInfomation'))
+        return render_template('dateofbirth.html',form=form , next=form)
+
+@app.route('/ContactInfomation',methods=['GET', 'POST'])
+def ContactInfomation():
+        form = forms.Userdetails()
+        next = forms.NextForm()
+        if next.validate_on_submit():
+            return redirect(url_for('add'))
+        return render_template('ContactInfomation.html',form=form , next=next)
+
+
+
+@app.route('/start',methods=['GET', 'POST'])
+def start():
+    form = forms.NextForm()
+    if form.validate_on_submit():
+            return redirect(url_for('details'))
+    return render_template('start.html', form=form)
