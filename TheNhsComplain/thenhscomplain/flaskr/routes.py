@@ -6,13 +6,13 @@ from models import Task , User
 from flask_login import login_user, login_required , logout_user, current_user
 import forms 
 
-@app.route('/')
-@app.route('/index')
+@app.route('/index', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     form = forms.NextForm()
     if form.validate_on_submit():
             return redirect(url_for('start'))
-    return render_template('index.html')
+    return render_template('index.html', form=form)
 
 
 
@@ -116,13 +116,15 @@ def dateofbirth():
             return redirect(url_for('ContactInfomation'))
         return render_template('dateofbirth.html',form=form , next=form)
 
-@app.route('/ContactInfomation',methods=['GET', 'POST'])
+@app.route('/ContactInfomation', methods=['GET', 'POST'])
 def ContactInfomation():
-        form = forms.Userdetails()
-        next = forms.NextForm()
-        if next.validate_on_submit():
-            return redirect(url_for('add'))
-        return render_template('ContactInfomation.html',form=form , next=next)
+    form = forms.Userdetails()
+    next = forms.NextForm()
+    if next.validate_on_submit():
+        print('Before redirect')
+        return redirect(url_for('add'))
+    return render_template('ContactInfomation.html', form=form , next=form)
+
 
 
 
@@ -130,5 +132,6 @@ def ContactInfomation():
 def start():
     form = forms.NextForm()
     if form.validate_on_submit():
+            print('Before redirect')
             return redirect(url_for('details'))
     return render_template('start.html', form=form)

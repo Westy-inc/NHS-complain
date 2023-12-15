@@ -1,4 +1,4 @@
-from flask_wtf import FlaskForm , Form
+from flask_wtf import FlaskForm 
 from wtforms import StringField , SubmitField,PasswordField,BooleanField,TextAreaField,IntegerField,RadioField
 from wtforms.validators import DataRequired,InputRequired,ValidationError,Length,Email
 from models import User
@@ -37,6 +37,8 @@ class Userdetails(FlaskForm):
     day = IntegerField ('day', validators=[InputRequired("input reqiured")])
     month = IntegerField ('month',  validators=[InputRequired("input reqiured")])
     year = IntegerField ('year', validators=[InputRequired("input reqiured")])
-    email =  StringField('email', validators=[InputRequired("input reqiured"),Email("This field requires a valid email address")])
-    submit = SubmitField('next')
+    email =  StringField('email')
     howtocontact = RadioField('howtocontact', choices=[('value','Email'),('value_two','Phone'),('value_three','Text message')])
+    phone = StringField('phone')
+    Text = StringField('text')
+    submit = SubmitField('next')
