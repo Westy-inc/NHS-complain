@@ -1,9 +1,12 @@
+# The code defines several FlaskForm classes for different purposes such as adding tasks, deleting
+# tasks, creating new users, logging in users, and collecting user details.
 from flask_wtf import FlaskForm 
 from wtforms import StringField , SubmitField,PasswordField,BooleanField,TextAreaField,IntegerField,RadioField
 from wtforms.validators import DataRequired,InputRequired,ValidationError,Length,Email
 from models import User
 
-
+# The `AddTaskForm` class is a form used to add a task with a title, body, and an option to make it
+# public.
 class AddTaskForm(FlaskForm):
     title = StringField('title', validators=[DataRequired(), Length(min=4, max=20)])
     body = TextAreaField('body', validators=[DataRequired()],render_kw={"rows": 30, "cols": 11,'placeholder': 'put you complaint here please put the name of the hospital,Pharmacy,GP or any other nhs health provider \nplease give as much deatail of your complaint here'},)

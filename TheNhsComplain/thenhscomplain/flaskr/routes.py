@@ -1,3 +1,8 @@
+"""
+    This is a Flask application with routes for user registration, login, logout, adding, editing, and
+    deleting tasks, and displaying user details.
+    :return: The code is returning the Flask application routes and their corresponding HTML templates.
+"""
 from flask_bcrypt import Bcrypt
 from datetime import datetime
 from app import app, db

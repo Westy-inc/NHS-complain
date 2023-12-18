@@ -1,3 +1,12 @@
+
+"""
+This code sets up a Flask application with a login system, database models for tasks, users,
+hospitals, and trusts, and an admin interface.    
+:param user_id: The `user_id` parameter is the unique identifier for a user in the User model. It is
+used to load a user from the database when a user logs in or performs any action that requires
+authentication
+:return: The code is returning a Flask application object named "app".
+    """
 from flask_login import UserMixin,LoginManager, current_user
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import Admin , AdminIndexView
@@ -72,7 +81,7 @@ admin.add_view(Adminsec(User,db.session))
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view='login'
-@login_manager.user_loader   #manager for logining user in 
+@login_manager.user_loader   #manager for logging user in 
 def load_user(user_id):
     return User.query.get(int(user_id))
 

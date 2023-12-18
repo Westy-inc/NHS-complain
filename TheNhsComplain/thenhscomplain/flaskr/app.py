@@ -1,3 +1,4 @@
+# This code is setting up a Flask application with a SQLite database.
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy

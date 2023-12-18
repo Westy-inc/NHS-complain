@@ -20,3 +20,5 @@ To use the application below are users and passwords that would be encyred but a
 
 
 some dummy entires have been added to the database 
+
+To setup the project run pip install pyproject.toml
