@@ -25,11 +25,9 @@ def index():
 def add():
     form = forms.AddTaskForm()
     if form.validate_on_submit():
-        t =Task(title=form.title.data,body=form.body.data,public=form.public.data,date=datetime.utcnow(),user_id=current_user.id)
+        t =Task(body=form.body.data,date=datetime.utcnow(),user_id=current_user.id)
         db.session.add(t)
         db.session.commit()
-        flash('task added')
-        print('Submitted title', form.title.data)
         return redirect(url_for('index'))
     return render_template('add.html',form=form)
 
@@ -110,7 +108,9 @@ def details():
         form = forms.Userdetails()
         next = forms.NextForm()
         if next.validate_on_submit():
-            return redirect(url_for('dateofbirth'))
+            userdetails = Task(name=form.name.data,surname=form.name.data , email=form.email.data)
+            db.session.add(userdetails)
+            return redirect(url_for('add'))
         return render_template('details.html',form=form , next = next)
 
 @app.route('/dateofbirth',methods=['GET', 'POST'])
@@ -118,17 +118,17 @@ def dateofbirth():
         form = forms.Userdetails()
         next = forms.NextForm()
         if next.validate_on_submit():
-            return redirect(url_for('ContactInfomation'))
+            return redirect(url_for('ContactInformation'))
         return render_template('dateofbirth.html',form=form , next=form)
 
-@app.route('/ContactInfomation', methods=['GET', 'POST'])
-def ContactInfomation():
+@app.route('/ContactInformation', methods=['GET', 'POST'])
+def ContactInformation():
     form = forms.Userdetails()
     next = forms.NextForm()
     if next.validate_on_submit():
         print('Before redirect')
         return redirect(url_for('add'))
-    return render_template('ContactInfomation.html', form=form , next=form)
+    return render_template('ContactInformation.html', form=form , next=form)
 
 
 

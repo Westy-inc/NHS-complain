@@ -20,9 +20,45 @@ document.getElementById('back-button');
     </div>
 
     <div  class="nhsuk-form-group">
-        <label class="nhsuk-label" id="label-first" for="firstname">Last name</label>
+        <label class="nhsuk-label" id="label-first" for="surnamename">Last name</label>
         {{ form.surname(class="nhsuk-input nhsuk-input--width-20") }}
     </div>
+
+    
+    <div  class="nhsuk-form-group">
+        <label class="nhsuk-label" id="label-first" for="surnamename">Last name</label>
+        {{ form.email(class="nhsuk-input nhsuk-input--width-20") }}
+    </div>
+
+    <div class="nhsuk-date-input" id="example">
+        <div class="nhsuk-date-input__item">
+            <div class="nhsuk-form-group">
+            <label class="nhsuk-label nhsuk-date-input__label" for="example-day">
+                Day
+            </label>
+            {{ form.day(class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2") }}
+            </div>
+        </div>
+        <div class="nhsuk-date-input__item">
+            <div class="nhsuk-form-group">
+            <label class="nhsuk-label nhsuk-date-input__label" for="example-month">
+                Month
+            </label>
+            {{ form.month(class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2") }}
+            </div>
+        </div>
+        <div class="nhsuk-date-input__item">
+            <div class="nhsuk-form-group">
+            <label class="nhsuk-label nhsuk-date-input__label" for="example-year">
+                Year
+            </label>
+            {{ form.year(class="nhsuk-input nhsuk-date-input__input nhsuk-input--width-2") }}
+            </div>
+        </div>
+        </div>
+    </fieldset>
+    </div>
+
 
     <form action="{{ url_for('details') }}" method="post">
         {{ next.csrf_token }}

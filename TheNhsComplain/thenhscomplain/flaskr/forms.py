@@ -9,7 +9,7 @@ from models import User
 # public.
 class AddTaskForm(FlaskForm):
     title = StringField('title', validators=[DataRequired(), Length(min=4, max=20)])
-    body = TextAreaField('body', validators=[DataRequired()],render_kw={"rows": 30, "cols": 11,'placeholder': 'put you complaint here please put the name of the hospital,Pharmacy,GP or any other nhs health provider \nplease give as much deatail of your complaint here'},)
+    body = TextAreaField('body', validators=[DataRequired()],render_kw={"rows": 30, "cols": 11,'placeholder': 'put you complaint here please put the name of the hospital,Pharmacy,GP or any other nhs health provider \nplease give as much detail of your complaint here'},)
     submit = SubmitField('Submit')
     public = BooleanField('public')
 
@@ -35,11 +35,11 @@ class NextForm(FlaskForm):
     submit = SubmitField('next')
 
 class Userdetails(FlaskForm):
-    name = StringField('name', validators=[InputRequired("input reqiured"), Length(min=4, max=20)]) 
-    surname = StringField('surname', validators=[InputRequired("input reqiured"), Length(min=4, max=20)]) 
-    day = IntegerField ('day', validators=[InputRequired("input reqiured")])
-    month = IntegerField ('month',  validators=[InputRequired("input reqiured")])
-    year = IntegerField ('year', validators=[InputRequired("input reqiured")])
+    name = StringField('name', validators=[InputRequired("input required"), Length(min=4, max=20)]) 
+    surname = StringField('surname', validators=[InputRequired("input required"), Length(min=4, max=20)]) 
+    day = IntegerField ('day', validators=[InputRequired("input required")])
+    month = IntegerField ('month',  validators=[InputRequired("input required")])
+    year = IntegerField ('year', validators=[InputRequired("input required")])
     email =  StringField('email')
     howtocontact = RadioField('howtocontact', choices=[('value','Email'),('value_two','Phone'),('value_three','Text message')])
     phone = StringField('phone')
