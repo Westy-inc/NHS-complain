@@ -1,3 +1,12 @@
+
+"""
+This code sets up a Flask application with a login system, database models for tasks, users,
+hospitals, and trusts, and an admin interface.    
+:param user_id: The `user_id` parameter is the unique identifier for a user in the User model. It is
+used to load a user from the database when a user logs in or performs any action that requires
+authentication
+:return: The code is returning a Flask application object named "app".
+    """
 from flask_login import UserMixin,LoginManager, current_user
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import Admin , AdminIndexView
@@ -12,19 +21,18 @@ login = LoginManager(app)
 #setting up db
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
     body = db.Column(db.String, nullable=False)
     date = db.Column(db.DateTime(timezone=True), nullable=False)
-    public = db.Column(db.Boolean, default=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    name = db.Column(db.String(20), nullable=False)
+    surname = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String, nullable=False)
 
 class User(db.Model,UserMixin ):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable =False)
     email = db.Column(db.String, nullable=False)
-    tasks = db.relationship('Task', backref='user', lazy=True)
-    admin = db.Column(db.Boolean, default=False)
+    WhatTrustadmin = db.Column(db.Integer, db.ForeignKey('trusts.id'))
 
 class Hospitals(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -72,7 +80,7 @@ admin.add_view(Adminsec(User,db.session))
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view='login'
-@login_manager.user_loader   #manager for logining user in 
+@login_manager.user_loader   #manager for logging user in 
 def load_user(user_id):
     return User.query.get(int(user_id))
 

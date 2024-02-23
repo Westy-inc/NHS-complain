@@ -2,5 +2,15 @@
     "python.analysis.extraPaths": [
         "./TheNhsComplain/thenhscomplain/flaskr",
         "./TheNhsComplain/thenhscomplain"
+    ],
+    "cSpell.words": [
+        "Adminsec",
+        "backref",
+        "dateofbirth",
+        "gettask",
+        "howtocontact",
+        "Postview",
+        "sqla",
+        "Trustadmin"
     ]
 }

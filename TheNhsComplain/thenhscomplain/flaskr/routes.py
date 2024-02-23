@@ -1,3 +1,8 @@
+"""
+    This is a Flask application with routes for user registration, login, logout, adding, editing, and
+    deleting tasks, and displaying user details.
+    :return: The code is returning the Flask application routes and their corresponding HTML templates.
+"""
 from flask_bcrypt import Bcrypt
 from datetime import datetime
 from app import app, db
@@ -11,22 +16,33 @@ import forms
 def index():
     form = forms.NextForm()
     if form.validate_on_submit():
-            return redirect(url_for('start'))
+        return redirect(url_for('start'))
     return render_template('index.html', form=form)
+
+
+
+def add_user_task(name, surname, email, body,date):
+    t = Task(body=body, date=datetime.utcnow(), name=name, surname=surname, email=email)
+    db.session.add(t)
+    db.session.commit(t)
+
+def gettask(body):
+    body=body
+
+def getinfo(name, surname, email):
+    name=name, 
+    surname=surname
+    email=email
 
 
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
     form = forms.AddTaskForm()
-    if form.validate_on_submit():
-        t =Task(title=form.title.data,body=form.body.data,public=form.public.data,date=datetime.utcnow(),user_id=current_user.id)
-        db.session.add(t)
-        db.session.commit()
-        flash('task added')
-        print('Submitted title', form.title.data)
+    if form.is_submitted():
+        gettask(body=form.body.data)
         return redirect(url_for('index'))
-    return render_template('add.html',form=form)
+    return render_template('add.html', form=form)
 
 
 @app.route('/edit/<int:task_id>',  methods=['GET', 'POST'])
@@ -49,7 +65,6 @@ def edit(task_id):
 def delete(task_id):
     task = Task.query.get(task_id)
     form = forms.deleteTaskForm()
-
     if task:
         if form.validate_on_submit():
             db.session.delete(task)
@@ -102,36 +117,33 @@ def dashboard():
 
 @app.route('/details',methods=['GET', 'POST'])
 def details():
-        form = forms.Userdetails()
-        next = forms.NextForm()
-        if next.validate_on_submit():
-            return redirect(url_for('dateofbirth'))
-        return render_template('details.html',form=form , next = next)
+    form = forms.Userdetails()
+    if form.is_submitted():
+        getinfo(name=form.name.data, surname=form.surname.data, email=form.email.data)
+        return redirect(url_for('ContactInformation'))
+    return render_template('details.html', form=form)
+
 
 @app.route('/dateofbirth',methods=['GET', 'POST'])
 def dateofbirth():
         form = forms.Userdetails()
         next = forms.NextForm()
-        if next.validate_on_submit():
-            return redirect(url_for('ContactInfomation'))
-        return render_template('dateofbirth.html',form=form , next=form)
+        if form.validate_on_submit():
+            return redirect(url_for('ContactInformation'))
 
-@app.route('/ContactInfomation', methods=['GET', 'POST'])
-def ContactInfomation():
+@app.route('/ContactInformation', methods=['GET', 'POST'])
+def ContactInformation():
     form = forms.Userdetails()
     next = forms.NextForm()
     if next.validate_on_submit():
         print('Before redirect')
         return redirect(url_for('add'))
-    return render_template('ContactInfomation.html', form=form , next=form)
-
-
-
+    return render_template('ContactInformation.html', form=form , next=form)
 
 @app.route('/start',methods=['GET', 'POST'])
 def start():
     form = forms.NextForm()
     if form.validate_on_submit():
-            print('Before redirect')
-            return redirect(url_for('details'))
+        print('Before redirect')
+        return redirect(url_for('details'))
     return render_template('start.html', form=form)

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block main %}
+<form action="{{ url_for('ContactInformation') }}" method="post">
+    {{ form.csrf_token }}
+    <div class="nhsuk-form-group">
+        <label class="nhsuk-label" id="label-first" for="phone2numeric">Phone number</label>
+    {{ form.phone(class="nhsuk-input nhsuk-input--width-20") }}
+    </div>
+
+    <div  class="nhsuk-form-group">
+        <label class="nhsuk-label" id="label-first" for="email">email</label>
+        {{ form.email(class="nhsuk-input nhsuk-input--width-20") }}
+    </div>
+    </fieldset>
+    </div>
+    <div class="col">
+    {{ form.submit(class="nhsuk-button") }}
+    </div>
+{% endblock %}
+
+</div>
