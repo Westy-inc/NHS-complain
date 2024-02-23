@@ -36,10 +36,11 @@
 
         <p>We'll ask you for: </p>
         <ul>
-            <li>What service you have a complaint aganist</li>
-            <li>When did this issue occur</li>
-            <li>and how it affect you and you care</li>
-            <li>your name and contact information</li>
+            <li>your name and a valid email or home address for reply</li>
+            <li>a phone number in case we need to contact you for additional information</li>
+            <li>the name, location, and postal address (if you know it) of the service you want to complain about</li>
+            <li>if your complaint is about healthcare in prison, the name of the prison</li>
+            <li> a clear description of what you want to complain about and when this happened</li>
         </ul>
         <form action="{{ url_for('start') }}" method="post">
             {{ form.csrf_token }}

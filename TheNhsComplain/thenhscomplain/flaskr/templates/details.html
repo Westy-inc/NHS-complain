@@ -24,12 +24,6 @@ document.getElementById('back-button');
         {{ form.surname(class="nhsuk-input nhsuk-input--width-20") }}
     </div>
 
-    
-    <div  class="nhsuk-form-group">
-        <label class="nhsuk-label" id="label-first" for="surnamename">Last name</label>
-        {{ form.email(class="nhsuk-input nhsuk-input--width-20") }}
-    </div>
-
     <div class="nhsuk-date-input" id="example">
         <div class="nhsuk-date-input__item">
             <div class="nhsuk-form-group">
@@ -58,9 +52,7 @@ document.getElementById('back-button');
         </div>
     </fieldset>
     </div>
-
-
-    <form action="{{ url_for('details') }}" method="post">
-        {{ next.csrf_token }}
-    {{ next.submit(class="nhsuk-button") }}
+    <div class="col">
+    {{ form.submit(class="nhsuk-button") }}
+    </div>
 {% endblock %}

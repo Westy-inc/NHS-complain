@@ -10,8 +10,7 @@ basedir = os.path.realpath(os.path.dirname(__file__))
 
 app = Flask (__name__,template_folder='templates')
 app.config['SECRET_KEY']  = 'djflkdjflksflk' #crf key to be moved to config file
-app.config['SQLALCHEMY_DATABASE_URI' ] =\
-'sqlite:///' + os.path.join(basedir, 'task.db')
+app.config['SQLALCHEMY_DATABASE_URI' ] ='sqlite:///' + os.path.join(basedir, 'task.db')
 app.config.from_object(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 

@@ -23,8 +23,6 @@ class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String, nullable=False)
     date = db.Column(db.DateTime(timezone=True), nullable=False)
-    public = db.Column(db.Boolean, default=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     name = db.Column(db.String(20), nullable=False)
     surname = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String, nullable=False)
@@ -34,7 +32,6 @@ class User(db.Model,UserMixin ):
     username = db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable =False)
     email = db.Column(db.String, nullable=False)
-    tasks = db.relationship('Task', backref='user', lazy=True)
     WhatTrustadmin = db.Column(db.Integer, db.ForeignKey('trusts.id'))
 
 class Hospitals(db.Model):
