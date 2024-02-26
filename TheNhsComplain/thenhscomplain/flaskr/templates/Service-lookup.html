@@ -1,4 +1,20 @@
+{% extends "base.html" %}
 {% block main %}
+<div class="nhsuk-form-group">
+    <label class="nhsuk-label" for="example">
+    look for the service you want to complain about
+    </label>
+    <input class="input" name="q" type="text" placeholder="search" hx-get="/search" hx-trigger="keyup changed delay:500ms" hx-target="#results">
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Hospital Name</th>
+            <th>Hospital address</th>
+        </tr>
+    </thead>
+    <tbody  id="results">
 
-
+    </tbody>    
+</table>
 {% endblock %}

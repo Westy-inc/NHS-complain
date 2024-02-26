@@ -6,8 +6,8 @@
 from flask_bcrypt import Bcrypt
 from datetime import datetime
 from app import app, db
-from flask import render_template ,redirect,url_for,flash
-from models import Task , User
+from flask import render_template ,redirect,url_for,flash,request
+from models import Task , User , Hospitals
 from flask_login import login_user, login_required , logout_user, current_user
 import forms 
 
@@ -147,3 +147,21 @@ def start():
         print('Before redirect')
         return redirect(url_for('details'))
     return render_template('start.html', form=form)
+
+
+@app.route('/service-lookup',methods=['GET', 'POST'])
+def Servicelookup():
+    return render_template('Service-lookup.html')
+
+
+
+@app.route('/search',methods=['GET', 'POST'])
+def search():
+    q = request.args.get("q")
+    print (q)
+    if q:
+        results = Hospitals.query.filter(Hospitals.HospitalName.icontains(q))\
+            .order_by(Hospitals.HospitalName.asc()).limit(5)
+    else:
+        results= []
+    return render_template('search_results.html', results=results)
