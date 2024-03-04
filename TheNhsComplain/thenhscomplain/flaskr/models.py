@@ -26,6 +26,7 @@ class Task(db.Model):
     name = db.Column(db.String(20), nullable=False)
     surname = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String, nullable=False)
+    Hospitalscomplaint = db.Column(db.Integer, db.ForeignKey('Hospitals.id'))
 
 class User(db.Model,UserMixin ):
     id = db.Column(db.Integer, primary_key=True)

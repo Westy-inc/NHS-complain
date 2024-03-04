@@ -11,7 +11,8 @@ from wtforms.fields import EmailField
 class AddTaskForm(FlaskForm):
     title = StringField('title', validators=[DataRequired(), Length(min=4, max=20)])
     body = TextAreaField('body', validators=[DataRequired()],render_kw={"rows": 30, "cols": 11,'placeholder': 'put you complaint here please put the name of the hospital,Pharmacy,GP or any other nhs health provider \nplease give as much detail of your complaint here'},)
-    submit = SubmitField('Su')
+    hospital = IntegerField('hospital', validators=[DataRequired()])
+    submit = SubmitField('Submit')
 
 class deleteTaskForm(FlaskForm):
     submit = SubmitField("delete?")

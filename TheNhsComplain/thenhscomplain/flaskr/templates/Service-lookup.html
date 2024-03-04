@@ -4,8 +4,11 @@
     <label class="nhsuk-label" for="example">
     look for the service you want to complain about
     </label>
-    <input class="input" name="q" type="text" placeholder="search" hx-get="/search" hx-trigger="keyup changed delay:500ms" hx-target="#results">
+    <input class="nhsuk-input" name="q" type="text" placeholder="search" hx-get="/search" hx-trigger="keyup changed delay:200ms" hx-target="#results">
 </div>
+<div class="nhsuk-hint" id="contact-hint">
+    Press on the name of the service you want to complain about and youll be take to the next step.
+  </div>
 <table>
     <thead>
         <tr>
@@ -14,7 +17,6 @@
         </tr>
     </thead>
     <tbody  id="results">
-
-    </tbody>    
+    </tbody> 
 </table>
 {% endblock %}

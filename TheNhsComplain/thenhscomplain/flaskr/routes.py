@@ -12,16 +12,12 @@ from flask_login import login_user, login_required , logout_user, current_user
 import forms 
 
 @app.route('/index', methods=['GET', 'POST'])
-@app.route('/', methods=['GET', 'POST'])
 def index():
-    form = forms.NextForm()
-    if form.validate_on_submit():
         return redirect(url_for('start'))
-    return render_template('index.html', form=form)
 
 
 
-def add_user_task(name, surname, email, body,date):
+def add_user_task(name, surname, email, body):
     t = Task(body=body, date=datetime.utcnow(), name=name, surname=surname, email=email)
     db.session.add(t)
     db.session.commit(t)
@@ -33,6 +29,12 @@ def getinfo(name, surname, email):
     name=name, 
     surname=surname
     email=email
+
+def gethospital(hospital):
+    hospital=hospital
+    Hospid = db.session.query(Hospitals).filter(Hospitals.HospitalName==hospital).first()
+    hospital = Hospid.id
+    print (hospital)
 
 
 
@@ -141,6 +143,7 @@ def ContactInformation():
     return render_template('ContactInformation.html', form=form , next=form)
 
 @app.route('/start',methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def start():
     form = forms.NextForm()
     if form.validate_on_submit():
@@ -151,12 +154,13 @@ def start():
 
 @app.route('/service-lookup',methods=['GET', 'POST'])
 def Servicelookup():
-    return render_template('Service-lookup.html')
+    return render_template('service-lookup.html')
 
 
 
 @app.route('/search',methods=['GET', 'POST'])
 def search():
+    form = forms.AddTaskForm()
     q = request.args.get("q")
     print (q)
     if q:
@@ -164,4 +168,9 @@ def search():
             .order_by(Hospitals.HospitalName.asc()).limit(5)
     else:
         results= []
-    return render_template('search_results.html', results=results)
+    if request.method == 'POST':
+        form.hospital.data = request.form["hosp"] #gets the name of the hospital for the add form (might need to change method later)
+        print (form.hospital.data)
+        gethospital(hospital=form.hospital.data)
+        return redirect(url_for('add'))
+    return render_template('search_results.html', results=results,form=form)
